@@ -176,6 +176,7 @@ class GPT2Converter(ModelFileConverter):
         """
         # Currently does not support exporting GPU models to onnx.
         import pdb
+        pdb.set_trace()
         device = model.device
         tokenizer = GPT2Tokenizer.from_pretrained(network_metadata.variant)
         input_ids = torch.tensor(
@@ -199,6 +200,7 @@ class GPT2Converter(ModelFileConverter):
 
         # Exports to ONNX
         opt_args={}
+        pdb.set_trace()
         version_major = int((torch.__version__).split('.')[0])
         version_minor = int((torch.__version__).split('.')[1])
         if version_major < 1 or (version_major == 1 and version_minor < 11):
@@ -212,7 +214,7 @@ class GPT2Converter(ModelFileConverter):
                 result = old_forward(input_ids, use_cache = False, **kwargs)
                 return result[0]
             gpt2_model.forward = _export_forward
-            pdb.set_trace()
+
             torch.onnx.export(
                 gpt2_model,
                 input_ids,

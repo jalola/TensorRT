@@ -138,7 +138,7 @@ class ModelFileConverter:
         else:
             g_logger_verbosity = PG_LOGGER.WARNING
 
-        with PG_LOGGER.verbosity(g_logger_verbosity):
+        with PG_LOGGER.verbosity(PG_LOGGER.EXTRA_VERBOSE):
             network_definition = result.get_network_definition(network_from_onnx_path(input_fpath))
 
             trt_engine = engine_from_network(
